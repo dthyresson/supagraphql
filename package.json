@@ -1,0 +1,38 @@
+{
+  "name": "supagraphql",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "David Thyresson",
+  "license": "MIT",
+  "dependencies": {
+    "@envelop/core": "*",
+    "@graphql-tools/schema": "8.0.1",
+    "@supabase/supabase-js": "^1.24.0",
+    "dotenv-defaults": "^3.0.0",
+    "fastify": "3.14.0",
+    "graphql": "^15.6.1",
+    "graphql-helix": "1.8.3",
+    "graphql-playground-html": "^1.6.29"
+  },
+  "devDependencies": {
+    "@types/node": "15.6.1",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "prettier": "2.4.1",
+    "ts-node": "10.0.0",
+    "typescript": "4.3.5"
+  },
+  "scripts": {
+    "build": "yarn pretty & yarn lint",
+    "lint": "yarn run eslint src/**/*",
+    "pretty": "yarn prettier --write src/**/*",
+    "start": "ts-node src/index.ts"
+  }
+}
