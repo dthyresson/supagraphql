@@ -17,6 +17,8 @@ GraphQL-Helix provides a GraphQL execution flow, that abstract the HTTP executio
 
 ![Countries Quick Start](https://github.com/dthyresson/supagraphql/blob/main/docs/screens/countries_quick_start.png 'Countries Quick Start')
 
+3. Or, create the `countries` table and data using the `sql/countries.sql` script
+
 ## Running the GraphQL Server
 
 1. Install all dependencies from the root of the repo (using `yarn`)
@@ -34,7 +36,6 @@ query COUNTRIES {
     id
     name
     iso2
-    iso3
     continent
   }
 }
