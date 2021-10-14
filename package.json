@@ -10,10 +10,11 @@
     "@graphql-tools/schema": "8.0.1",
     "@supabase/supabase-js": "^1.24.0",
     "dotenv-defaults": "^3.0.0",
-    "fastify": "3.14.0",
+    "fastify": "3.22.0",
     "graphql": "^15.6.1",
     "graphql-helix": "1.8.3",
-    "graphql-playground-html": "^1.6.29"
+    "graphql-playground-html": "^1.6.29",
+    "pino-pretty": "^7.1.0"
   },
   "devDependencies": {
     "@types/node": "15.6.1",

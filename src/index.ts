@@ -1,5 +1,7 @@
+import 'dotenv-defaults/config'
+
 /* eslint-disable no-console */
-import fastify from 'fastify'
+import Fastify from 'fastify'
 import {
   getGraphQLParameters,
   processRequest,
@@ -22,6 +24,8 @@ import { typeDefs } from './sdl/graphql'
 import { country, countries } from './resolvers/country'
 import { hello } from './resolvers/hello'
 
+const PORT = process.env.PORT
+
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers: {
@@ -41,7 +45,9 @@ const getEnveloped = envelop({
   plugins: [useSchema(schema), useLogger(), useMaskedErrors(), useTiming()],
 })
 
-const app = fastify()
+const app = Fastify({
+  logger: { prettyPrint: true },
+})
 
 app.route({
   method: ['GET', 'POST'],
@@ -83,6 +89,6 @@ app.route({
   },
 })
 
-app.listen(3000, () => {
-  console.log(`GraphQL server is running.`)
+app.listen(PORT, () => {
+  console.log(`GraphQL server is running on port ${PORT}.`)
 })
