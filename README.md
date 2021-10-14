@@ -13,7 +13,9 @@ GraphQL-Helix provides a GraphQL execution flow, that abstract the HTTP executio
 ## Setup
 
 1. Create new project on Supabase
-2. Create the sample `Countries` data
+2. Create the Quick Start sample `Countries` data
+
+![Countries Quick Start](https://github.com/dthyresson/supagraphql/blob/main/docs/screens/countries_quick_start.png 'Countries Quick Start')
 
 ## Running the GraphQL Server
 
@@ -23,6 +25,8 @@ GraphQL-Helix provides a GraphQL execution flow, that abstract the HTTP executio
 4. Open http://localhost:3000/graphql in your browser, and try to run:
 
 `query { hello }`
+
+![Hello](https://github.com/dthyresson/supagraphql/blob/main/docs/screens/query_hello.png 'Hello')
 
 ```
 query COUNTRIES {
@@ -36,6 +40,8 @@ query COUNTRIES {
 }
 ```
 
+![Countries](https://github.com/dthyresson/supagraphql/blob/main/docs/screens/query_countries.png 'Countries')
+
 ```
 // with { "id": 234 }
 query GET_COUNTRY($id: Int!) {
@@ -47,3 +53,5 @@ query GET_COUNTRY($id: Int!) {
   }
 }
 ```
+
+![Country](https://github.com/dthyresson/supagraphql/blob/main/docs/screens/query_country.png 'Country')
