@@ -6,9 +6,16 @@ This example relies on the Supabase sample Countries data being loaded into the 
 
 ## Envelop example with GraphQL-Helix
 
-This example demonstrate how to implement the basic GraphQL Envelop flow with Envelop and [`graphql-helix`](https://github.com/contrawork/graphql-helix).
+This example demonstrate how to implement the basic GraphQL [Envelop](https://github.com/dotansimha/envelop) flow with Envelop and [`graphql-helix`](https://github.com/contrawork/graphql-helix).
 
 GraphQL-Helix provides a GraphQL execution flow, that abstract the HTTP execution, and allow you to easily support multiple transports, based on your needs.
+
+This example uses the following Envelop plugins:
+
+- [`useLogger`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-logger.ts) to log GraphQL lifecycle activity
+- [`useMaskedErrors`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-masked-errors.ts) to prevent sensitive information from leaking in error message responses
+- [`useSchema`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-schema.ts) to load your GraphQL schema
+- [`useTiming`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-timing.ts) to inject timing traces for each phase
 
 ## Setup
 
