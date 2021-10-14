@@ -43,7 +43,6 @@ query COUNTRIES {
     id
     name
     iso2
-    continent
   }
 }
 ```
