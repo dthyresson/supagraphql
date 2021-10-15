@@ -12,6 +12,7 @@ import {
 
 import {
   envelop,
+  useExtendContext,
   useLogger,
   useMaskedErrors,
   useSchema,
@@ -25,7 +26,7 @@ import { renderPlaygroundPage } from 'graphql-playground-html'
 /* Schema and Type Definitions */
 import { typeDefs } from './sdl/graphql'
 
-import { validateUser, resolveUserFn } from './lib/auth'
+import { validateUser, resolveUserFn, setAccessToken } from './lib/auth'
 import { signIn, signUp } from './resolvers/authentication'
 import { country, countries } from './resolvers/country'
 import { hello } from './resolvers/hello'
@@ -58,6 +59,9 @@ const schema = makeExecutableSchema({
 const getEnveloped = envelop({
   plugins: [
     useSchema(schema),
+    useExtendContext(async (contextSoFar) => {
+      return setAccessToken(contextSoFar)
+    }),
     useGenericAuth({
       resolveUserFn,
       validateUser,

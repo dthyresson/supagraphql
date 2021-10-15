@@ -8,7 +8,7 @@ export const signUp = async (
   email: string,
   password: string
 ): Promise<User> => {
-  const { user, session, error } = await supabase.auth.signUp({
+  const { user, error } = await supabase.auth.signUp({
     email,
     password,
   })

@@ -5,6 +5,14 @@ import { supabase } from '../lib/supabase'
 
 import type { User } from '../types/user'
 
+export const setAccessToken = (context) => {
+  const headers = context.req['headers'] || {}
+  const authorization = headers['authorization']
+  const token = authorization.split(' ')[1]
+
+  return { access_token: token }
+}
+
 export const verifyToken = (token: string) => {
   if (!process.env.SUPABASE_JWT_SECRET) {
     console.error('SUPABASE_JWT_SECRET env var is not set.')
@@ -27,15 +35,15 @@ export const resolveUserFn: ResolveUserFn<User> = async (context) => {
   // Make sure to either return `null` or the user object.
 
   try {
-    const headers = context.req['headers'] || {}
-    const authorization = headers['authorization']
-    const access_token = authorization.split(' ')[1]
+    if (!context.access_token) {
+      throw Error('Missing token')
+    } else {
+      const session = verifyToken(context.access_token as string)
 
-    const session = verifyToken(access_token)
+      const user = { ...session } as User
 
-    const user = { ...session, access_token } as User
-
-    return user
+      return user
+    }
   } catch (e) {
     context.req['log'].error('Failed to validate token')
 
@@ -44,14 +52,13 @@ export const resolveUserFn: ResolveUserFn<User> = async (context) => {
 }
 export const validateUser: ValidateUserFn<User> = async (user, context) => {
   // Here you can implement any custom to check if the user is valid and have access to the server.
-  // This method is being triggered in different flows, based on the mode you chose to implement.
-
-  // If you are using the `protect-auth-directive` mode, you'll also get 2 additional parameters: the resolver parameters as object and the DirectiveNode of the auth directive.
+  // By using the `protect-auth-directive` mode, you'll also get 2 additional parameters:
+  // the resolver parameters as object and the DirectiveNode of the auth directive.
 
   if (!user) {
     throw new Error(`Unauthenticated!`)
   }
 
   // set the token to be used to authenticate subsequent requests
-  supabase.auth.setAuth(context.currentUser['access_token'])
+  supabase.auth.setAuth(context['access_token'] as string)
 }
