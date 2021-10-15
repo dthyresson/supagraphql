@@ -1,5 +1,4 @@
 import { GraphQLError } from 'graphql'
-import * as jwt from 'jsonwebtoken'
 
 import { supabase } from '../lib/supabase'
 
@@ -13,9 +12,6 @@ export const signUp = async (
     email,
     password,
   })
-
-  console.log(user)
-  console.log(session?.access_token)
 
   if (error) {
     throw new GraphQLError(`Unable to sign up: ${error.message}`)
@@ -33,27 +29,9 @@ export const signIn = async (
     password,
   })
 
-  console.log(user)
-  console.log(session?.access_token)
-
   if (error) {
     throw new GraphQLError(`Unable to sign up: ${error.message}`)
   }
 
   return { ...user, access_token: session?.access_token } as User
-}
-
-export const verifyToken = (token: string) => {
-  if (!process.env.SUPABASE_JWT_SECRET) {
-    console.error('SUPABASE_JWT_SECRET env var is not set.')
-    throw new Error('SUPABASE_JWT_SECRET env var is not set.')
-  }
-
-  try {
-    const secret = process.env.SUPABASE_JWT_SECRET as string
-    return jwt.verify(token, secret)
-  } catch (error) {
-    console.error(error)
-    throw Error('Could not verify token')
-  }
 }
