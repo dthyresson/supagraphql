@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@envelop/core": "*",
+    "@envelop/generic-auth": "^1.0.1",
     "@graphql-tools/schema": "8.0.1",
     "@supabase/supabase-js": "^1.24.0",
     "dotenv-defaults": "^3.0.0",
@@ -14,6 +15,8 @@
     "graphql": "^15.6.1",
     "graphql-helix": "1.8.3",
     "graphql-playground-html": "^1.6.29",
+    "graphql-tag": "^2.12.5",
+    "jsonwebtoken": "^8.5.1",
     "pino-pretty": "^7.1.0"
   },
   "devDependencies": {
