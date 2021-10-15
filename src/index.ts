@@ -28,7 +28,7 @@ import { typeDefs } from './sdl/graphql'
 
 import { validateUser, resolveUserFn, setAccessToken } from './lib/auth'
 import { signIn, signUp } from './resolvers/authentication'
-import { country, countries } from './resolvers/country'
+import { country, countries, updateCountry } from './resolvers/country'
 import { hello } from './resolvers/hello'
 
 const PORT = process.env.PORT
@@ -51,6 +51,13 @@ const schema = makeExecutableSchema({
       },
       signIn: async (_, { email, password }) => {
         return await signIn(email, password)
+      },
+      updateCountry: async (_, { id, input }) => {
+        console.log('<<<< IN updateCountry')
+
+        // console.log(context.access_token, '<<<< mutate updateCountry')
+
+        return await updateCountry({ id, input })
       },
     },
   },

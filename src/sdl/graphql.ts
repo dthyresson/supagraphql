@@ -10,6 +10,10 @@ export const typeDefs = /* GraphQL */ `
     iso3: String
   }
 
+  input UpdateCountryInput {
+    name: String
+  }
+
   type Credentials {
     email: String!
     password: String!
@@ -30,5 +34,6 @@ export const typeDefs = /* GraphQL */ `
   type Mutation {
     signUp(email: String!, password: String!): User!
     signIn(email: String!, password: String!): User!
+    updateCountry(id: Int!, input: UpdateCountryInput!): Country! @auth
   }
 `

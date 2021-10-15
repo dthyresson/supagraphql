@@ -32,3 +32,16 @@ export const countries = async (): Promise<[Country]> => {
 
   return countries as [Country]
 }
+
+export const updateCountry = async ({ id, input }): Promise<Country> => {
+  const { data: countries, error } = await supabase
+    .from('countries')
+    .update(input)
+    .eq('id', id)
+
+  if (!countries || error) {
+    throw new GraphQLError('Country could not be updated')
+  }
+
+  return countries && countries[0]
+}
