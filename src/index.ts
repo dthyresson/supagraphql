@@ -16,7 +16,6 @@ import {
   useLogger,
   useMaskedErrors,
   useSchema,
-  useTiming,
 } from '@envelop/core'
 import { useGenericAuth } from '@envelop/generic-auth'
 
@@ -57,7 +56,6 @@ const getEnveloped = envelop({
       skipIntrospection: false,
     }),
     useMaskedErrors({ formatError }),
-    useTiming(),
   ],
   enableInternalTracing: true,
 })

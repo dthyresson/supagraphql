@@ -17,7 +17,7 @@ This example uses the following Envelop plugins:
 - [`useGenericAuth`](https://github.com/dotansimha/envelop/tree/main/packages/plugins/generic-auth) implement a custom authentication flow that checks for the `@auth` directive on queries or mutations and a valid Supabase JWT. We'll use this to authenticate operations protected by RLS.
 - [`useMaskedErrors`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-masked-errors.ts) to prevent sensitive information from leaking in error message responses
 - [`useSchema`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-schema.ts) to load your GraphQL schema
-- [`useTiming`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-timing.ts) to inject timing traces for each phase
+- [`enableInternalTracing`] to inject timing traces for each phase
 
 ## Setup
 
