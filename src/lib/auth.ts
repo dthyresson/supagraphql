@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken'
 
 import { supabase } from '../lib/supabase'
 
-import type { User } from '../types/user'
+import type { User } from '../schema/types/user'
 
 export const setAccessToken = (context) => {
   const headers = context.req['headers'] || {}

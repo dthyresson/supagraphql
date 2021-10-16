@@ -1,17 +1,31 @@
 export const typeDefs = /* GraphQL */ `
   directive @auth on FIELD_DEFINITION
 
+  enum Continent {
+    AFRICA
+    ANTARCTICA
+    ASIA
+    EUROPE
+    OCEANIA
+    NORTH_AMERICA
+    SOUTH_AMERICA
+  }
+
   type Country {
     id: Int!
     name: String!
     local_name: String
-    continent: String
-    iso2: String
+    continent: Continent
+    iso2: String!
     iso3: String
   }
 
   input UpdateCountryInput {
     name: String
+    iso2: String
+    iso3: String
+    local_name: String
+    continent: Continent
   }
 
   type Credentials {
@@ -27,8 +41,8 @@ export const typeDefs = /* GraphQL */ `
 
   type Query {
     hello: String!
-    country(id: Int!): Country! @auth
-    countries: [Country!]! @auth
+    country(id: Int!): Country!
+    countries: [Country!]!
   }
 
   type Mutation {

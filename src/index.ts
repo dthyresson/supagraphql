@@ -24,43 +24,15 @@ import { makeExecutableSchema } from '@graphql-tools/schema'
 import { renderPlaygroundPage } from 'graphql-playground-html'
 
 /* Schema and Type Definitions */
-import { typeDefs } from './sdl/graphql'
-
+import { typeDefs } from './schema/sdl/typeDefs'
+import { resolvers } from './schema/resolvers/index'
 import { validateUser, resolveUserFn, setAccessToken } from './lib/auth'
-import { signIn, signUp } from './resolvers/authentication'
-import { country, countries, updateCountry } from './resolvers/country'
-import { hello } from './resolvers/hello'
 
 const PORT = process.env.PORT
 
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers: {
-    Query: {
-      hello: () => hello(),
-      country: async (_, { id }) => {
-        return await country(id)
-      },
-      countries: async () => {
-        return await countries()
-      },
-    },
-    Mutation: {
-      signUp: async (_, { email, password }) => {
-        return await signUp(email, password)
-      },
-      signIn: async (_, { email, password }) => {
-        return await signIn(email, password)
-      },
-      updateCountry: async (_, { id, input }) => {
-        console.log('<<<< IN updateCountry')
-
-        // console.log(context.access_token, '<<<< mutate updateCountry')
-
-        return await updateCountry({ id, input })
-      },
-    },
-  },
+  resolvers,
 })
 
 const getEnveloped = envelop({
