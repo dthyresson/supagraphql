@@ -28,6 +28,36 @@ This example uses the following Envelop plugins:
 
 3. Or, create the `countries` table and data using the `sql/countries.sql` script
 
+4. Since we want to secure the `countries` data, we'll use Row Level Security (RLS) and create the following policies so that everyone can read (SELECT), but only authenticated users can add (INSERT) or edit (UPDATE) -- and no one can delete:
+
+```sql
+--
+-- Name: countries Enable access to all users; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY "Enable access to all users" ON public.countries FOR SELECT USING (true);
+
+--
+-- Name: countries Enable insert for authenticated users only; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY "Enable insert for authenticated users only" ON public.countries FOR INSERT WITH CHECK ((auth.role() = 'authenticated'::text));
+
+--
+-- Name: countries Enable update for users based auth; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY "Enable update for users based auth" ON public.countries FOR UPDATE USING ((auth.role() = 'authenticated'::text)) WITH CHECK ((auth.role() = 'authenticated'::text));
+
+--
+-- Name: countries; Type: ROW SECURITY; Schema: public; Owner: -
+--
+
+ALTER TABLE public.countries ENABLE ROW LEVEL SECURITY;
+```
+
+> Note: these policies can be found in `sql.countries_rls.sql`
+
 ## Running the GraphQL Server
 
 1. Install all dependencies from the root of the repo (using `yarn`)
