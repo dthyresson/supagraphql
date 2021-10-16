@@ -8,6 +8,9 @@ import {
 } from './country'
 import { hello } from './hello'
 
+/**
+ * Resolvers map to Queries and Mutations
+ */
 export const resolvers = {
   Query: {
     hello: () => hello(),

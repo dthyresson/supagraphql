@@ -9,6 +9,13 @@ import type {
   MutationUpdateCountryArgs,
 } from '../types/index'
 
+/**
+ * Fetch a Country by id
+ *
+ * @param id
+ * @param context
+ * @returns the Country
+ */
 export const country = async (id: number, context): Promise<Country> => {
   const { data: country, error } = await supabase
     .from('countries')
@@ -24,6 +31,12 @@ export const country = async (id: number, context): Promise<Country> => {
   return country
 }
 
+/**
+ * Fetch all Countries
+ *
+ * @param context
+ * @returns an array of Country
+ */
 export const countries = async (context): Promise<[Country]> => {
   const { data: countries, error } = await supabase
     .from('countries')
@@ -38,6 +51,15 @@ export const countries = async (context): Promise<[Country]> => {
   return countries as [Country]
 }
 
+/**
+ * Insert a new Country
+ *
+ *  Note: requires authentication via the @auth directive on the mutation
+ *
+ * @param input The attritbutes for the new Country
+ * @param context
+ * @returns
+ */
 export const createCountry = async (
   { input }: MutationCreateCountryArgs,
   context
@@ -54,6 +76,15 @@ export const createCountry = async (
   return countries && (countries[0] as Country)
 }
 
+/**
+ * Delete a Country
+ *
+ * Note: requires authentication via the @auth directive on the mutation
+ *
+ * @param id of the Country to delete
+ * @param context
+ * @returns
+ */
 export const deleteCountry = async (
   { id }: MutationDeleteCountryArgs,
   context
@@ -71,6 +102,16 @@ export const deleteCountry = async (
   return countries && (countries[0] as Country)
 }
 
+/**
+ * Update a Country
+ *
+ * Note: requires authentication via the @auth directive on the mutation
+ *
+ * @param id pf the Country
+ * @param input attributes to modify on th given Country
+ * @param context
+ * @returns
+ */
 export const updateCountry = async (
   { id, input }: MutationUpdateCountryArgs,
   context

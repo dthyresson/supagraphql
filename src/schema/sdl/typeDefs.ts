@@ -1,5 +1,14 @@
 import gql from 'graphql-tag'
 
+/**
+ * The schema.
+ *
+ * Queries or Mutations that are protected and require
+ * authentication are given the @auth directive,
+ *
+ * All others are public.
+ *
+ */
 export const typeDefs = gql`
   directive @auth on FIELD_DEFINITION
 

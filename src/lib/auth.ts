@@ -6,6 +6,13 @@ import { supabase } from '../lib/supabase'
 
 import type { User } from '../schema/types'
 
+/**
+ * Used by Envelop's useExtendContext to set the
+ * access_token in context.
+ *
+ * @param context
+ * @returns access_token
+ */
 export const setAccessToken = (context) => {
   const headers = context.req['headers'] || {}
   if (headers['authorization']) {
@@ -16,6 +23,15 @@ export const setAccessToken = (context) => {
   }
 }
 
+/**
+ * Verifies and decodes the Supabase JWT.
+ *
+ * If the token is invalid, expired, etc then
+ * verification will raise an error.
+ *
+ * @param token
+ * @returns the decoded token
+ */
 export const verifyToken = (token: string) => {
   if (!process.env.SUPABASE_JWT_SECRET) {
     console.error('SUPABASE_JWT_SECRET env var is not set.')

@@ -4,6 +4,13 @@ import { supabase } from '../../lib/supabase'
 
 import type { User } from '../types/index'
 
+/**
+ * Supabase sign up via GraphQL Mutation
+ *
+ * @param email
+ * @param password
+ * @returns
+ */
 export const signUp = async (
   email: string,
   password: string
@@ -20,6 +27,17 @@ export const signUp = async (
   return user as User
 }
 
+/**
+ /**
+ * Supabase sign in via GraphQL Mutation.
+ *
+ * Provides a JWT access token to be used to authorize
+ * subsequent GraphQL requests.
+ *
+ * @param email
+ * @param password
+ * @returns
+ */
 export const signIn = async (
   email: string,
   password: string
