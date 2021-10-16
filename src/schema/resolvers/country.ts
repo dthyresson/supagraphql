@@ -8,7 +8,7 @@ export const country = async (id: number, context): Promise<Country> => {
   const { data: country, error } = await supabase
     .from('countries')
     .select('id, name, local_name, continent, iso2, iso3')
-    .eq('idf', id)
+    .eq('id', id)
     .single()
 
   if (error) {
