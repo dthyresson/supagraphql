@@ -2,7 +2,12 @@ import { GraphQLError } from 'graphql'
 
 import { supabase } from '../../lib/supabase'
 
-import type { Country } from '../types/index'
+import type {
+  Country,
+  MutationDeleteCountryArgs,
+  MutationCreateCountryArgs,
+  MutationUpdateCountryArgs,
+} from '../types/index'
 
 export const country = async (id: number, context): Promise<Country> => {
   const { data: country, error } = await supabase
@@ -33,7 +38,10 @@ export const countries = async (context): Promise<[Country]> => {
   return countries as [Country]
 }
 
-export const createCountry = async ({ input }, context): Promise<Country> => {
+export const createCountry = async (
+  { input }: MutationCreateCountryArgs,
+  context
+): Promise<Country> => {
   const { data: countries, error } = await supabase
     .from('countries')
     .insert([input])
@@ -46,7 +54,10 @@ export const createCountry = async ({ input }, context): Promise<Country> => {
   return countries && (countries[0] as Country)
 }
 
-export const deleteCountry = async ({ id }, context): Promise<Country> => {
+export const deleteCountry = async (
+  { id }: MutationDeleteCountryArgs,
+  context
+): Promise<Country> => {
   const { data: countries, error } = await supabase
     .from('countries')
     .delete()
@@ -61,7 +72,7 @@ export const deleteCountry = async ({ id }, context): Promise<Country> => {
 }
 
 export const updateCountry = async (
-  { id, input },
+  { id, input }: MutationUpdateCountryArgs,
   context
 ): Promise<Country> => {
   const { data: countries, error } = await supabase
