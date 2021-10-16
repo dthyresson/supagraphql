@@ -14,7 +14,7 @@ This example uses the following Envelop plugins:
 
 - [`useLogger`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-logger.ts) to log GraphQL lifecycle activity
 - [`useExtendContext`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-extend-context.ts) to inject info into context, such as the authenticatiojn `access_token` JWT
-- [`useGenericAuth`](https://github.com/dotansimha/envelop/tree/main/packages/plugins/generic-auth) implement a custom authentication flow that checks for the `@auth` directive on queries or mutations and a vlid Supabase JWT
+- [`useGenericAuth`](https://github.com/dotansimha/envelop/tree/main/packages/plugins/generic-auth) implement a custom authentication flow that checks for the `@auth` directive on queries or mutations and a valid Supabase JWT. We'll use this to authenticate operations protected by RLS.
 - [`useMaskedErrors`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-masked-errors.ts) to prevent sensitive information from leaking in error message responses
 - [`useSchema`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-schema.ts) to load your GraphQL schema
 - [`useTiming`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-timing.ts) to inject timing traces for each phase
