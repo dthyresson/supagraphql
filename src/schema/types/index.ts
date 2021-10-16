@@ -23,6 +23,14 @@ export type Country = {
   name: Scalars['String'];
 };
 
+export type CreateCountryInput = {
+  continent?: Maybe<Scalars['String']>;
+  iso2: Scalars['String'];
+  iso3?: Maybe<Scalars['String']>;
+  local_name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
 export type Credentials = {
   __typename?: 'Credentials';
   email: Scalars['String'];
@@ -31,9 +39,21 @@ export type Credentials = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createCountry: Country;
+  deleteCountry: Country;
   signIn: User;
   signUp: User;
   updateCountry: Country;
+};
+
+
+export type MutationCreateCountryArgs = {
+  input: CreateCountryInput;
+};
+
+
+export type MutationDeleteCountryArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -152,6 +172,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Country: ResolverTypeWrapper<Country>;
+  CreateCountryInput: CreateCountryInput;
   Credentials: ResolverTypeWrapper<Credentials>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -165,6 +186,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Country: Country;
+  CreateCountryInput: CreateCountryInput;
   Credentials: Credentials;
   Int: Scalars['Int'];
   Mutation: {};
@@ -195,6 +217,8 @@ export type CredentialsResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createCountry?: Resolver<ResolversTypes['Country'], ParentType, ContextType, RequireFields<MutationCreateCountryArgs, 'input'>>;
+  deleteCountry?: Resolver<ResolversTypes['Country'], ParentType, ContextType, RequireFields<MutationDeleteCountryArgs, 'id'>>;
   signIn?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'password'>>;
   signUp?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'password'>>;
   updateCountry?: Resolver<ResolversTypes['Country'], ParentType, ContextType, RequireFields<MutationUpdateCountryArgs, 'id' | 'input'>>;

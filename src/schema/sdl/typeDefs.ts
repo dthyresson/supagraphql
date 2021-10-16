@@ -12,6 +12,14 @@ export const typeDefs = gql`
     iso3: String
   }
 
+  input CreateCountryInput {
+    name: String!
+    iso2: String!
+    iso3: String
+    local_name: String
+    continent: String
+  }
+
   input UpdateCountryInput {
     name: String
     iso2: String
@@ -40,6 +48,8 @@ export const typeDefs = gql`
   type Mutation {
     signUp(email: String!, password: String!): User!
     signIn(email: String!, password: String!): User!
+    createCountry(input: CreateCountryInput!): Country! @auth
+    deleteCountry(id: Int!): Country! @auth
     updateCountry(id: Int!, input: UpdateCountryInput!): Country! @auth
   }
 `

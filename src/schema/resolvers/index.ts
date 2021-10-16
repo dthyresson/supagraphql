@@ -1,5 +1,11 @@
 import { signIn, signUp } from './authentication'
-import { country, countries, updateCountry } from './country'
+import {
+  country,
+  countries,
+  deleteCountry,
+  createCountry,
+  updateCountry,
+} from './country'
 import { hello } from './hello'
 
 export const resolvers = {
@@ -18,6 +24,12 @@ export const resolvers = {
     },
     signIn: async (_, { email, password }) => {
       return await signIn(email, password)
+    },
+    createCountry: async (_, { input }, context) => {
+      return await createCountry({ input }, context)
+    },
+    deleteCountry: async (_, { id }, context) => {
+      return await deleteCountry({ id }, context)
     },
     updateCountry: async (_, { id, input }, context) => {
       return await updateCountry({ id, input }, context)

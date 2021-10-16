@@ -1,16 +1,12 @@
 # supagraphql
 
-GraphQL server using Supabase, GraphQL Helix, Envelop and Fastify
+**supagraphql** is an example GraphQL Server implemented using [Supabase](https://www.supabase.io), [GraphQL Helix](https://github.com/contrawork/graphql-helix), [Envelop](https://github.com/dotansimha/envelop) and [Fastify](https://www.fastify.io).
 
-This example relies on the Supabase sample Countries data being loaded into the `countries` table.
+This example relies on the Supabase sample Countries data being loaded into the `countries` table and row-level-security (RLS) to secure mutations.
 
-## Envelop example with GraphQL-Helix
+## Envelop and GraphQL-Helix
 
-This example demonstrate how to implement the basic GraphQL [Envelop](https://github.com/dotansimha/envelop) flow with Envelop and [`graphql-helix`](https://github.com/contrawork/graphql-helix).
-
-GraphQL-Helix provides a GraphQL execution flow, that abstract the HTTP execution, and allow you to easily support multiple transports, based on your needs.
-
-This example uses the following Envelop plugins:
+This example uses the following [Envelop](https://github.com/dotansimha/envelop) plugins:
 
 - [`useLogger`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-logger.ts) to log GraphQL lifecycle activity
 - [`useExtendContext`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-extend-context.ts) to inject info into context, such as the authenticatiojn `access_token` JWT
@@ -21,7 +17,7 @@ This example uses the following Envelop plugins:
 
 ## Setup
 
-1. Create new project on Supabase
+1. Create new project on [Supabase](https://www.supabase.io)
 2. Create the Quick Start sample `Countries` data
 
 ![Countries Quick Start](https://github.com/dthyresson/supagraphql/blob/main/docs/screens/countries_quick_start.png 'Countries Quick Start')
@@ -83,6 +79,12 @@ You should get the response back:
 
 ## Example Queries and Mutations
 
+Queries can be performed by all users.
+
+Mutations on countries are protected by Envelop's `generic auth` plugin that checks the Authorization header for a valid, unexpired and verified Bearer token. This is a JWT (JSON Web Token) set as the session, or returns as part of the Sign In.
+
+> Note: The `SUPABASE_JWT_SECRET` is needed to verify the JWT.
+
 ### Get Countries
 
 ```ts
@@ -124,7 +126,7 @@ query GET_COUNTRY($id: Int!) {
 
 ### Update a Country
 
-> note: This nutation requires an authenticated user, ie a valid Bearer JWT in the Authorization header.
+> Note: This Mutation requires an authenticated user, ie a valid Bearer JWT in the Authorization header.
 
 ```ts
 mutation UPDATE_COUNTRY($id: Int!, $input: UpdateCountryInput!) {
@@ -140,6 +142,71 @@ mutation UPDATE_COUNTRY($id: Int!, $input: UpdateCountryInput!) {
 
 ```json
 { "id": 1, "input": { "name": "London is a Country", "iso2": "LIAC" } }
+```
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjM0MzQ0NTU1LCJzdWIiOiI0NWUyOWJiNS00NTA3LTQ0NTktOTFkNC03NDMxNDU0OGUzODkiLCJlbWFpbCI6ImR0aHlyZXNzb24rc2JnM0BnbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIn0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.f050nI-sCynXBQ3vSkacUFQsQgumClmFpM5PuKe6hek"
+}
+```
+
+### Create a Country
+
+> Note: This Mutation requires an authenticated user, ie a valid Bearer JWT in the Authorization header.
+
+```ts
+mutation ADD_COUNTRY($input: CreateCountryInput!) {
+  createCountry(input: $input) {
+    id
+    name
+    iso2
+    continent
+  }
+}
+```
+
+#### Variables
+
+```json
+{
+  "input": {
+    "name": "In a Big Country",
+    "iso2": "BIG"
+  }
+}
+```
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjM0MzQ0NTU1LCJzdWIiOiI0NWUyOWJiNS00NTA3LTQ0NTktOTFkNC03NDMxNDU0OGUzODkiLCJlbWFpbCI6ImR0aHlyZXNzb24rc2JnM0BnbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIn0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCJ9.f050nI-sCynXBQ3vSkacUFQsQgumClmFpM5PuKe6hek"
+}
+```
+
+### Delete a Country
+
+> Note: This Mutation requires an authenticated user, ie a valid Bearer JWT in the Authorization header.
+
+```ts
+mutation DELETE_COUNTRY($id: Int!) {
+  deleteCountry(id: $id) {
+    id
+    name
+    iso2
+    continent
+  }
+}
+```
+
+#### Variables
+
+```json
+{
+  "id": 92
+}
 ```
 
 #### Headers

@@ -46,7 +46,9 @@ export const resolveUserFn: ResolveUserFn<User> = async (context) => {
   } catch (e) {
     context.req['log'].error(e, 'Failed to validate token')
 
-    throw new GraphQLError('Could not verify token')
+    throw new GraphQLError(
+      'Your credentials could not be verified. Please sign in again.'
+    )
   }
 }
 
@@ -62,6 +64,6 @@ export const validateUser: ValidateUserFn<User> = async (user, context) => {
   supabase.auth.setAuth(context['access_token'] as string)
 
   if (!user) {
-    throw new Error(`Unauthenticated!`)
+    throw new GraphQLError("You don't have access to do that.")
   }
 }

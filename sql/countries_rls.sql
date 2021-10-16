@@ -1,14 +1,22 @@
 --
+-- Name: countries Authenticated users can create countries; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY "Authenticated users can create countries" ON public.countries FOR INSERT WITH CHECK ((auth.role() = 'authenticated'::text));
+
+
+--
+-- Name: countries Authenticated users can delete countries; Type: POLICY; Schema: public; Owner: -
+--
+
+CREATE POLICY "Authenticated users can delete countries" ON public.countries FOR DELETE USING ((auth.role() = 'authenticated'::text));
+
+
+--
 -- Name: countries Enable access to all users; Type: POLICY; Schema: public; Owner: -
 --
 
 CREATE POLICY "Enable access to all users" ON public.countries FOR SELECT USING (true);
-
---
--- Name: countries Enable insert for authenticated users only; Type: POLICY; Schema: public; Owner: -
---
-
-CREATE POLICY "Enable insert for authenticated users only" ON public.countries FOR INSERT WITH CHECK ((auth.role() = 'authenticated'::text));
 
 
 --

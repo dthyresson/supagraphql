@@ -33,6 +33,33 @@ export const countries = async (context): Promise<[Country]> => {
   return countries as [Country]
 }
 
+export const createCountry = async ({ input }, context): Promise<Country> => {
+  const { data: countries, error } = await supabase
+    .from('countries')
+    .insert([input])
+
+  if (!countries || error) {
+    context.req['log'].error(error, error.message)
+    throw new GraphQLError('Country could not be created')
+  }
+
+  return countries && (countries[0] as Country)
+}
+
+export const deleteCountry = async ({ id }, context): Promise<Country> => {
+  const { data: countries, error } = await supabase
+    .from('countries')
+    .delete()
+    .eq('id', id)
+
+  if (!countries || error) {
+    context.req['log'].error(error, error.message)
+    throw new GraphQLError('Country could not be deleted')
+  }
+
+  return countries && (countries[0] as Country)
+}
+
 export const updateCountry = async (
   { id, input },
   context
@@ -47,5 +74,5 @@ export const updateCountry = async (
     throw new GraphQLError('Country could not be updated')
   }
 
-  return countries && countries[0]
+  return countries && (countries[0] as Country)
 }
