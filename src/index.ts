@@ -1,5 +1,3 @@
-import 'dotenv-defaults/config'
-
 /* eslint-disable no-console */
 import Fastify from 'fastify'
 
@@ -19,22 +17,12 @@ import {
 } from '@envelop/core'
 import { useGenericAuth } from '@envelop/generic-auth'
 
-import { makeExecutableSchema } from '@graphql-tools/schema'
 import { renderPlaygroundPage } from 'graphql-playground-html'
 
 import { config } from './config'
-
-/* Schema and Type Definitions */
-import { typeDefs } from './schema/sdl/typeDefs'
-import { resolvers } from './schema/resolvers/index'
-
+import { schema } from './schema/index'
 import { validateUser, resolveUserFn, setAccessToken } from './lib/auth'
 import { formatError } from './lib/errors'
-
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-})
 
 const getEnveloped = envelop({
   plugins: [
