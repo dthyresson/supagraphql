@@ -14,7 +14,7 @@ This example uses the following Envelop plugins:
 
 - [`useLogger`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-logger.ts) to log GraphQL lifecycle activity
 - [`useExtendContext`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-extend-context.ts) to inject info into context, such as the authenticatiojn `access_token` JWT
-- ['useGenericAuth`](https://github.com/dotansimha/envelop/tree/main/packages/plugins/generic-auth) implement a custom authentication flow that checks for the `@auth` directive on queries or mutations and a vlid Supabase JWT
+- [`useGenericAuth`](https://github.com/dotansimha/envelop/tree/main/packages/plugins/generic-auth) implement a custom authentication flow that checks for the `@auth` directive on queries or mutations and a vlid Supabase JWT
 - [`useMaskedErrors`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-masked-errors.ts) to prevent sensitive information from leaking in error message responses
 - [`useSchema`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-schema.ts) to load your GraphQL schema
 - [`useTiming`](https://github.com/dotansimha/envelop/blob/main/packages/core/src/plugins/use-timing.ts) to inject timing traces for each phase
@@ -63,12 +63,13 @@ query COUNTRIES {
 }
 ```
 
+#### Returns
+
 ![Countries](https://github.com/dthyresson/supagraphql/blob/main/docs/screens/query_countries.png 'Countries')
 
 ### Get Country
 
 ```ts
-// with { "id": 234 }
 query GET_COUNTRY($id: Int!) {
   country(id: $id) {
     id
@@ -78,6 +79,14 @@ query GET_COUNTRY($id: Int!) {
   }
 }
 ```
+
+#### Variables
+
+```json
+{ "id": 234 }
+```
+
+#### Returns
 
 ![Country](https://github.com/dthyresson/supagraphql/blob/main/docs/screens/query_country.png 'Country')
 
@@ -126,7 +135,7 @@ mutation SIGNUP($email: String!, $password: String!) {
 { "email": "someone@example.com", "password": "12345678" }
 ```
 
-### Sign Im
+### Sign In
 
 ```ts
 mutation SIGNIN($email: String!, $password: String!) {
