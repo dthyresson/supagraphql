@@ -59,6 +59,7 @@ const getEnveloped = envelop({
     useMaskedErrors({ formatError }),
     useTiming(),
   ],
+  enableInternalTracing: true,
 })
 
 app.route({
