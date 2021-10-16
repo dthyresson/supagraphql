@@ -22,7 +22,7 @@ export const country = async (id: number, context): Promise<Country> => {
 export const countries = async (context): Promise<[Country]> => {
   const { data: countries, error } = await supabase
     .from('countries')
-    .select('id, name, local_name, continent, iso2, iso')
+    .select('id, name, local_name, continent, iso2, iso3')
     .order('name', { ascending: true })
 
   if (error) {

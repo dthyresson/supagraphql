@@ -22,14 +22,14 @@ import { useGenericAuth } from '@envelop/generic-auth'
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { renderPlaygroundPage } from 'graphql-playground-html'
 
+import { config } from './config'
+
 /* Schema and Type Definitions */
 import { typeDefs } from './schema/sdl/typeDefs'
 import { resolvers } from './schema/resolvers/index'
 
 import { validateUser, resolveUserFn, setAccessToken } from './lib/auth'
 import { formatError } from './lib/errors'
-
-const PORT = process.env.PORT
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -100,6 +100,6 @@ app.route({
   },
 })
 
-app.listen(PORT, () => {
-  console.log(`GraphQL server is running on port ${PORT}.`)
+app.listen(config.port, () => {
+  console.log(`GraphQL server is running on port ${config.port}.`)
 })
