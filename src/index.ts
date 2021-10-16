@@ -36,10 +36,6 @@ const schema = makeExecutableSchema({
   resolvers,
 })
 
-const app = Fastify({
-  logger: { prettyPrint: true },
-})
-
 const getEnveloped = envelop({
   plugins: [
     useSchema(schema),
@@ -51,13 +47,14 @@ const getEnveloped = envelop({
       validateUser,
       mode: 'protect-auth-directive',
     }),
-    useLogger({
-      logFn: console.log,
-      skipIntrospection: false,
-    }),
+    useLogger(),
     useMaskedErrors({ formatError }),
   ],
   enableInternalTracing: true,
+})
+
+const app = Fastify({
+  logger: { prettyPrint: true },
 })
 
 app.route({

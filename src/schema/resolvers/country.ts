@@ -4,41 +4,46 @@ import { supabase } from '../../lib/supabase'
 
 import type { Country } from '../types/index'
 
-export const country = async (id: number): Promise<Country> => {
+export const country = async (id: number, context): Promise<Country> => {
   const { data: country, error } = await supabase
     .from('countries')
     .select('id, name, local_name, continent, iso2, iso3')
-    .eq('id', id)
+    .eq('idf', id)
     .single()
 
   if (error) {
-    console.error(error)
+    context.req['log'].error(error, error.message)
     throw new GraphQLError('Country not found')
   }
 
   return country
 }
 
-export const countries = async (): Promise<[Country]> => {
+export const countries = async (context): Promise<[Country]> => {
   const { data: countries, error } = await supabase
     .from('countries')
-    .select('id, name, local_name, continent, iso2, iso3')
+    .select('id, name, local_name, continent, iso2, iso')
     .order('name', { ascending: true })
 
   if (error) {
+    context.req['log'].error(error, error.message)
     throw new GraphQLError('Could not fetch Countries.')
   }
 
   return countries as [Country]
 }
 
-export const updateCountry = async ({ id, input }): Promise<Country> => {
+export const updateCountry = async (
+  { id, input },
+  context
+): Promise<Country> => {
   const { data: countries, error } = await supabase
     .from('countries')
     .update(input)
     .eq('id', id)
 
   if (!countries || error) {
+    context.req['log'].error(error, error.message)
     throw new GraphQLError('Country could not be updated')
   }
 
