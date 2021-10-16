@@ -62,8 +62,10 @@ ALTER TABLE public.countries ENABLE ROW LEVEL SECURITY;
 
 1. Install all dependencies from the root of the repo (using `yarn`)
 2. Configure `.env` with your Supabase client `SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_JWT_SECRET` from the Supabase API settings
-3. `cd` into that folder, and run `yarn start`.
-4. Open http://localhost:3000/graphql in your browser, and try to run:
+3. `cd` into that folder,
+4. To generate types, run `yarn gen`.
+5. To start the server, run `yarn start`
+6. Open http://localhost:3000/graphql in your browser, and try to run:
 
 `query { hello }`
 
@@ -182,3 +184,12 @@ mutation SIGNIN($email: String!, $password: String!) {
 ```json
 { "email": "someone@example.com", "password": "12345678" }
 ```
+
+### GraphQL Code Generation
+
+The command `yarn gen`
+
+- Generates types from the SDL in typedefs
+- Generates anintrospection schema in json format
+
+You will want to regenerate types when modifying the schema (types or queries/mutations).

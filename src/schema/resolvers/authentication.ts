@@ -2,7 +2,7 @@ import { GraphQLError } from 'graphql'
 
 import { supabase } from '../../lib/supabase'
 
-import type { User } from '../types/user'
+import type { User } from '../types/index'
 
 export const signUp = async (
   email: string,

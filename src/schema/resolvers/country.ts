@@ -2,7 +2,7 @@ import { GraphQLError } from 'graphql'
 
 import { supabase } from '../../lib/supabase'
 
-import type { Country } from '../types/country'
+import type { Country } from '../types/index'
 
 export const country = async (id: number): Promise<Country> => {
   const { data: country, error } = await supabase
@@ -19,7 +19,7 @@ export const country = async (id: number): Promise<Country> => {
   return country
 }
 
-export const countries = async (): Promise<[Country]> => {
+export const countries = async (): Promise<[any]> => {
   const { data: countries, error } = await supabase
     .from('countries')
     .select('id, name, local_name, continent, iso2, iso3')
@@ -30,7 +30,7 @@ export const countries = async (): Promise<[Country]> => {
     throw new GraphQLError('Could not fetch Countries.')
   }
 
-  return countries as [Country]
+  return countries as any
 }
 
 export const updateCountry = async ({ id, input }): Promise<Country> => {

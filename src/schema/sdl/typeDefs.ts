@@ -1,21 +1,13 @@
-export const typeDefs = /* GraphQL */ `
-  directive @auth on FIELD_DEFINITION
+import gql from 'graphql-tag'
 
-  enum Continent {
-    AFRICA
-    ANTARCTICA
-    ASIA
-    EUROPE
-    OCEANIA
-    NORTH_AMERICA
-    SOUTH_AMERICA
-  }
+export const typeDefs = gql`
+  directive @auth on FIELD_DEFINITION
 
   type Country {
     id: Int!
     name: String!
     local_name: String
-    continent: Continent
+    continent: String
     iso2: String!
     iso3: String
   }
@@ -25,7 +17,7 @@ export const typeDefs = /* GraphQL */ `
     iso2: String
     iso3: String
     local_name: String
-    continent: Continent
+    continent: String
   }
 
   type Credentials {

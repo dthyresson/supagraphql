@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken'
 
 import { supabase } from '../lib/supabase'
 
-import type { User } from '../schema/types/user'
+import type { User } from '../schema/types'
 
 export const setAccessToken = (context) => {
   const headers = context.req['headers'] || {}
@@ -42,7 +42,7 @@ export const resolveUserFn: ResolveUserFn<User> = async (context) => {
     } else {
       const session = verifyToken(context.access_token as string)
 
-      const user = { ...session } as User
+      const user = session as User
 
       return user
     }
