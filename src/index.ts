@@ -26,13 +26,19 @@ import { renderPlaygroundPage } from 'graphql-playground-html'
 /* Schema and Type Definitions */
 import { typeDefs } from './schema/sdl/typeDefs'
 import { resolvers } from './schema/resolvers/index'
+
 import { validateUser, resolveUserFn, setAccessToken } from './lib/auth'
+import { formatError } from './lib/errors'
 
 const PORT = process.env.PORT
 
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
+})
+
+const app = Fastify({
+  logger: { prettyPrint: true },
 })
 
 const getEnveloped = envelop({
@@ -46,14 +52,13 @@ const getEnveloped = envelop({
       validateUser,
       mode: 'protect-auth-directive',
     }),
-    useLogger(),
-    useMaskedErrors(),
+    useLogger({
+      logFn: console.log,
+      skipIntrospection: false,
+    }),
+    useMaskedErrors({ formatError }),
     useTiming(),
   ],
-})
-
-const app = Fastify({
-  logger: { prettyPrint: true },
 })
 
 app.route({
@@ -92,6 +97,9 @@ app.route({
       })
 
       sendResult(result, res.raw)
+
+      // Tell fastify a response was sent
+      res.sent = true
     }
   },
 })

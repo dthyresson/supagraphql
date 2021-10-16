@@ -19,18 +19,17 @@ export const country = async (id: number): Promise<Country> => {
   return country
 }
 
-export const countries = async (): Promise<[any]> => {
+export const countries = async (): Promise<[Country]> => {
   const { data: countries, error } = await supabase
     .from('countries')
     .select('id, name, local_name, continent, iso2, iso3')
     .order('name', { ascending: true })
 
   if (error) {
-    console.error(error)
     throw new GraphQLError('Could not fetch Countries.')
   }
 
-  return countries as any
+  return countries as [Country]
 }
 
 export const updateCountry = async ({ id, input }): Promise<Country> => {

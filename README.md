@@ -139,7 +139,7 @@ mutation UPDATE_COUNTRY($id: Int!, $input: UpdateCountryInput!) {
 #### Variables
 
 ```json
-{ "id": 1, "input": { "name": "foos", "iso2": "2" } }
+{ "id": 1, "input": { "name": "London is a Country", "iso2": "LIAC" } }
 ```
 
 #### Headers
