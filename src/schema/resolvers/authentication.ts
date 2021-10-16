@@ -30,7 +30,7 @@ export const signIn = async (
   })
 
   if (error) {
-    throw new GraphQLError(`Unable to sign up: ${error.message}`)
+    throw new GraphQLError(`Unable to sign in: ${error.message}`)
   }
 
   return { ...user, access_token: session?.access_token } as User
