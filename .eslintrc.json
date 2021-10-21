@@ -11,6 +11,8 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-types": "off"
   }
 }
