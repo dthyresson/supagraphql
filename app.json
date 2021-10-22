@@ -1,7 +1,7 @@
 {
   "name": "Supagraphql",
   "description": "An example GraphQL Server implemented using Supabase, GraphQL Helix, Envelop and Fastify.",
-  "repository": "https://github.com/heroku/node-js-getting-started",
+  "repository": "https://github.com/dthyresson/supagraphql",
   "logo": "https://raw.githubusercontent.com/dthyresson/supagraphql/main/docs/images/logo.png",
   "keywords": ["node", "supabase", "graphql", "envelop", "helix"]
 }

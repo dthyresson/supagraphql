@@ -1,3 +1,5 @@
+![supagraphql](https://raw.githubusercontent.com/dthyresson/supagraphql/main/docs/images/logo.png)
+
 # supagraphql
 
 **supagraphql** is an example GraphQL Server implemented using [Supabase](https://www.supabase.io), [GraphQL Helix](https://github.com/contrawork/graphql-helix), [Envelop](https://github.com/dotansimha/envelop) and [Fastify](https://www.fastify.io).
@@ -9,6 +11,8 @@ You can try a [demo](https://supagraphql-production.up.railway.app/graphql) at [
 Or, if you want your own:
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2Fdthyresson%2Fsupagraphql&envs=SUPABASE_URL%2CSUPABASE_KEY%2CSUPABASE_JWT_SECRET&SUPABASE_URLDesc=Supabase+Project+Url&SUPABASE_KEYDesc=Supabase+Anonymous+Key&SUPABASE_JWT_SECRETDesc=Supabase+JWT+Secret+to+verify+authentication)
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/dthyresson/supagraphql)
 
 ## Envelop and GraphQL-Helix
 
