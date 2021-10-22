@@ -46,11 +46,13 @@
     "yarn": "1.x"
   },
   "scripts": {
-    "build": "yarn pretty & yarn lint",
+    "build": "tsc & yarn pretty & yarn lint",
+    "postinstall": "tsc",
     "lint": "yarn run eslint src/**/*",
     "pretty": "yarn prettier --write src/**/*",
-    "start": "ts-node src/index.ts",
+    "start": "node dist/index.js",
     "gen": "graphql-codegen --config codegen.yml",
-    "test": "yarn jest"
+    "test": "yarn jest",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   }
 }
