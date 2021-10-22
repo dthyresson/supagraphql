@@ -16,10 +16,10 @@ app.register(import('fastify-cors'), {
 })
 
 app.route({
-  method: ['GET', 'POST'],
+  method: ['GET'],
   url: '/',
   async handler(req, res) {
-    res.code(200).send({ message: 'Supagraphql' })
+    res.redirect('/graphql')
   },
 })
 
