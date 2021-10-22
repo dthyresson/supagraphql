@@ -4,6 +4,12 @@
 
 This example relies on the Supabase sample Countries data being loaded into the `countries` table and row-level-security (RLS) to secure mutations.
 
+You can try a [demo](https://supagraphql-production.up.railway.app/graphql) at [https://supagraphql-production.up.railway.app/graphql](https://supagraphql-production.up.railway.app/graphql)
+
+Or, if you want your own:
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2Fdthyresson%2Fsupagraphql&envs=SUPABASE_URL%2CSUPABASE_KEY%2CSUPABASE_JWT_SECRET&SUPABASE_URLDesc=Supabase+Project+Url&SUPABASE_KEYDesc=Supabase+Anonymous+Key&SUPABASE_JWT_SECRETDesc=Supabase+JWT+Secret+to+verify+authentication)
+
 ## Envelop and GraphQL-Helix
 
 This example uses the following [Envelop](https://github.com/dotansimha/envelop) plugins:
