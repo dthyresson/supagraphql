@@ -67,11 +67,11 @@ ALTER TABLE public.countries ENABLE ROW LEVEL SECURITY;
 ## Running the GraphQL Server
 
 1. Install all dependencies from the root of the repo (using `yarn`)
-2. Configure `.env` with your Supabase client `SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_JWT_SECRET` from the Supabase API settings
-3. `cd` into that folder,
-4. To generate types, run `yarn gen`.
-5. To start the server, run `yarn start`
-6. Open http://localhost:3000/graphql in your browser, and try to run:
+1. Configure `.env` with your Supabase client `SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_JWT_SECRET` from the Supabase API settings
+1. `cd` into that folder,
+1. To generate types, run `yarn gen`.
+1. To start the server, run `yarn start`
+1. Open http://localhost:3000/graphql in your browser, and try to run:
 
 `query { hello }`
 
@@ -86,6 +86,13 @@ You should get the response back:
   }
 }
 ```
+
+# Build and serve
+
+If you deploy this project, you'll need to compile the typescript and build into `/dist`:
+
+1. To build the typescripts into `dist`, run `yarn build`
+1. To serve when deploying, run `yarn serve`
 
 ## Example Queries and Mutations
 

@@ -49,7 +49,8 @@
     "build": "tsc & yarn pretty & yarn lint",
     "lint": "yarn run eslint src/**/*",
     "pretty": "yarn prettier --write src/**/*",
-    "start": "node dist/main/index.js",
+    "start": "ts-node src/index.ts",
+    "serve": "node dist/main/index.js",
     "gen": "graphql-codegen --config codegen.yml",
     "test": "yarn jest"
   }
