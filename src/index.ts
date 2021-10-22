@@ -15,6 +15,14 @@ app.register(import('fastify-cors'), {
   credentials: true,
 })
 
+app.route({
+  method: ['GET', 'POST'],
+  url: '/',
+  async handler(req, res) {
+    res.code(200).send({ message: 'Supagraphql' })
+  },
+})
+
 // and just need a single route to handle GraphQL requests at
 // the configured endpoint (/graphql).
 // Note: We allow GET for the GraphQL playground, but all
