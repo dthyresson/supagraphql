@@ -41,7 +41,7 @@ app.route({
 })
 
 // and finally start up!
-app.listen(config.port, () => {
+app.listen(config.port, '0.0.0.0', () => {
   console.log(
     `GraphQL server is running at ${config.graphQLEndpoint} on port ${config.port}.`
   )
