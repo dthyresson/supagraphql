@@ -6,7 +6,7 @@ import { handleGraphQLRequest } from './helix'
 
 // Fastify with logger
 const app = Fastify({
-  logger: { prettyPrint: true },
+  logger: { prettyPrint: process.env.NODE_ENV !== 'production' },
 })
 
 // We'll setup cors ...
