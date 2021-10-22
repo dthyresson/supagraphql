@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase'
 
 import type {
   Country,
+  QueryCountriesForContinentArgs,
   MutationDeleteCountryArgs,
   MutationCreateCountryArgs,
   MutationUpdateCountryArgs,
@@ -52,11 +53,37 @@ export const countries = async (context): Promise<[Country]> => {
 }
 
 /**
+ * Fetch all Countries for a Continent
+ *
+ * @param context
+ * @returns an array of Country
+ */
+export const countriesForContinent = async (
+  { continent }: QueryCountriesForContinentArgs,
+  context
+): Promise<[Country]> => {
+  const { data: countries, error } = await supabase
+    .from('countries')
+    .select('id, name, local_name, continent, iso2, iso3')
+    .eq('continent', continent)
+    .order('name', { ascending: true })
+
+  context.req['log'].debug(continent)
+
+  if (error) {
+    context.req['log'].error(error, error.message)
+    throw new GraphQLError('Could not fetch Countries.')
+  }
+
+  return countries as [Country]
+}
+
+/**
  * Insert a new Country
  *
  *  Note: requires authentication via the @auth directive on the mutation
  *
- * @param input The attritbutes for the new Country
+ * @param input The attributes for the new Country
  * @param context
  * @returns
  */
