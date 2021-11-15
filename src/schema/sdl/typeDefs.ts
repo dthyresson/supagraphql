@@ -52,6 +52,7 @@ export const typeDefs = gql`
     hello: String!
     country(id: Int!): Country!
     countries: [Country!]!
+    countriesForContinent(continent: String!): [Country!]!
   }
 
   type Mutation {

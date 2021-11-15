@@ -2,6 +2,7 @@ import { signIn, signUp } from './authentication'
 import {
   country,
   countries,
+  countriesForContinent,
   deleteCountry,
   createCountry,
   updateCountry,
@@ -19,6 +20,9 @@ export const resolvers = {
     },
     countries: async (context) => {
       return await countries(context)
+    },
+    countriesForContinent: async (_, input, context) => {
+      return await countriesForContinent(input, context)
     },
   },
   Mutation: {

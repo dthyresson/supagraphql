@@ -80,8 +80,13 @@ export type MutationUpdateCountryArgs = {
 export type Query = {
   __typename?: 'Query'
   countries: Array<Country>
+  countriesForContinent: Array<Country>
   country: Country
   hello: Scalars['String']
+}
+
+export type QueryCountriesForContinentArgs = {
+  continent: Scalars['String']
 }
 
 export type QueryCountryArgs = {
@@ -315,6 +320,12 @@ export type QueryResolvers<
     Array<ResolversTypes['Country']>,
     ParentType,
     ContextType
+  >
+  countriesForContinent?: Resolver<
+    Array<ResolversTypes['Country']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryCountriesForContinentArgs, 'continent'>
   >
   country?: Resolver<
     ResolversTypes['Country'],

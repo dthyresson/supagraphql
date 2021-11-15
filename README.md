@@ -234,6 +234,25 @@ mutation DELETE_COUNTRY($id: Int!) {
 }
 ```
 
+### Get Countries for a Continent
+
+```ts
+query COUNTRIES_FOR_CONTINENT($continent: String!) {
+  countriesForContinent(continent: $continent) {
+    id
+    name
+    iso3
+    continent
+  }
+}
+```
+
+#### Variables
+
+```json
+{ "continent": "Europe" }
+```
+
 ### Sign Up
 
 ```ts
