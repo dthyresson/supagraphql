@@ -46,6 +46,7 @@ export const typeDefs = gql`
     id: String!
     email: String!
     access_token: String
+    roles: String
   }
 
   type Query {
@@ -57,6 +58,7 @@ export const typeDefs = gql`
   type Mutation {
     signUp(email: String!, password: String!): User!
     signIn(email: String!, password: String!): User!
+    updateRoles(roles: String!): User! @auth
     createCountry(input: CreateCountryInput!): Country! @auth
     deleteCountry(id: Int!): Country! @auth
     updateCountry(id: Int!, input: UpdateCountryInput!): Country! @auth

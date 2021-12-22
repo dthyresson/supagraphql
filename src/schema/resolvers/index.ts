@@ -1,4 +1,4 @@
-import { signIn, signUp } from './authentication'
+import { signIn, signUp, updateRoles } from './authentication'
 import {
   country,
   countries,
@@ -36,6 +36,9 @@ export const resolvers = {
     },
     updateCountry: async (_, { id, input }, context) => {
       return await updateCountry({ id, input }, context)
+    },
+    updateRoles: async (_, { roles }) => {
+      return await updateRoles(roles)
     },
   },
 }

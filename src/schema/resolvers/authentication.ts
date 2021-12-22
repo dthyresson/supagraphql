@@ -53,3 +53,29 @@ export const signIn = async (
 
   return { ...user, access_token: session?.access_token } as User
 }
+
+/**
+ /**
+ * Supabase update user via GraphQL Mutation.
+ *
+ * Provides a JWT access token to be used to authorize
+ * subsequent GraphQL requests.
+ *
+ * @returns
+ */
+export const updateRoles = async (roles: string): Promise<any> => {
+  console.log('>>>>> updateRoles')
+
+  const { data, error } = await supabase.rpc('set_roles', {
+    roles: "['foo', 'goo']",
+  })
+
+  if (error) {
+    throw new GraphQLError(`Unable to sign in: ${error.message}`)
+  }
+
+  console.log(data)
+  console.log(roles)
+
+  return { ...data }
+}
